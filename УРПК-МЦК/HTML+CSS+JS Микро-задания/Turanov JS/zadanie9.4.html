@@ -1,0 +1,28 @@
+<HTML>
+
+<HEAD>
+</HEAD>
+
+<BODY>
+    <div>
+        <input type="text" id="value1" size="5" value="0"></input>
+        <button id="btn1">Обновить</button>
+    </div>
+    <div>все делители: <b id="value2"></b></div>
+    <script>
+        var btn1 = document.getElementById('btn1');
+        btn1.onfocuse = function () {
+            var num = parseInt(document.getElementById('value1').value);
+            let divisors = [];
+            for (let i = 1; i <= num; i++) {
+                if (num % i === 0) {
+                    divisors.push(i);
+                }
+            }
+            document.getElementById('value2').innerHTML = divisors;
+            console.log(divisors);
+        }
+    </script>
+</BODY>
+
+</HTML>

@@ -1,0 +1,25 @@
+<HTML>
+
+<HEAD>
+</HEAD>
+
+<BODY>
+    <P>Страница, содержащая сценарий.</P>
+    <div>Дата: <b id="value1"></b></div>
+    <div>Номер недели: <b id="value2"></b></div>
+    <script>
+        function getWeekNumber(date) {
+            const onejan = new Date(date.getFullYear(), 0, 1);
+            const millisecsInDay = 86400000;
+            return Math.ceil(((date - onejan) / millisecsInDay + onejan.getDay() + 1) / 7);
+        }
+
+        const date = new Date('2023-05-15');
+        const weekNumber = getWeekNumber(date);
+
+        document.getElementById('value1').innerHTML = date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
+        document.getElementById('value2').innerHTML = weekNumber;
+    </script>
+</BODY>
+
+</HTML>

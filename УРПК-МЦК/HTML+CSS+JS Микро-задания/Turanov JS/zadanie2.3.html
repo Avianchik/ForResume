@@ -1,0 +1,24 @@
+<HTML>
+
+<HEAD>
+
+    <script language="JavaScript">
+        function care(x, y) {
+            x = Math.sqrt(x);
+            y = Math.sqrt(y);
+            document.write("Расстояние до начала координат: ", (x + y), " см^3");
+            return x + y
+        }
+    </script>
+</HEAD>
+
+<BODY>
+    <FORM name="form1">
+        x(A): <input type="text" size=5 name="ax">
+        y(A): <input type="text" size=5 name="ay">
+        <hr>
+        <input type="button" value=Вычислить onClick="care(document.form1.ax.value, document.form1.ay.value)">
+    </FORM>
+</BODY>
+
+</HTML>

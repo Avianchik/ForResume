@@ -1,0 +1,42 @@
+<HTML>
+
+<HEAD>
+    <title>Первый сценарий в документе</title>
+</HEAD>
+
+<BODY>
+    <form>
+        <label for="gender">Пол:</label>
+        <select id="gender">
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+        </select>
+        <label for="age">Возраст:</label>
+        <input type="number" id="age" min="0" max="120">
+        <label for="marital-status">Семейное положение:</label>
+        <select id="marital-status">
+            <option value="single">Не женат/Не замужем</option>
+            <option value="married">Женат/Замужем</option>
+            <option value="divorced">Разведен/Разведена</option>
+            <option value="widowed">Вдовец/Вдова</option>
+        </select>
+        <button id="btn1">результат</button>
+    </form>
+
+    <script language="JavaScript">
+        var form = document.querySelector('form');
+        var btn1 = document.getElementById('btn1');
+        btn1.onclick = function() {
+            var gender = document.getElementById('gender').value;
+            var age = document.getElementById('age').value;
+            var sel = document.getElementById("marital-status"); 
+            var maritalStatus = sel.options[sel.selectedIndex].text;
+            var result = 'Пол: ' + gender + '\n' +
+                'Возраст: ' + age + '\n' +
+                'Семейное положение: ' + maritalStatus;
+            alert(result);
+        };
+    </script>
+</BODY>
+
+</HTML>

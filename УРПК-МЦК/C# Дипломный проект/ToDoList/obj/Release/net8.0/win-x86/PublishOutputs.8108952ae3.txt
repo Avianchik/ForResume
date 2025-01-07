@@ -1,0 +1,7 @@
+C:\Users\mazun\Desktop\Диплом\Self-Contained Full Trim\appsettings.Development.json
+C:\Users\mazun\Desktop\Диплом\Self-Contained Full Trim\appsettings.json
+C:\Users\mazun\Desktop\Диплом\Self-Contained Full Trim\ToDoList.pdb
+C:\Users\mazun\Desktop\Диплом\Self-Contained Full Trim\ToDoList.DAL.pdb
+C:\Users\mazun\Desktop\Диплом\Self-Contained Full Trim\ToDoList.Service.pdb
+C:\Users\mazun\Desktop\Диплом\Self-Contained Full Trim\ToDoList.Domain.pdb
+C:\Users\mazun\Desktop\Диплом\Self-Contained Full Trim\ToDoList.exe

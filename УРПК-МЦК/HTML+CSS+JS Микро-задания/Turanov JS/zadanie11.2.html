@@ -1,0 +1,23 @@
+<HTML>
+    <HEAD>
+ 
+    </HEAD>
+    <BODY>
+    
+        Введите предложение: <input type="text" id="value1" value=""></input>
+        <button id="btn1">Посчитать</button>
+        <div>Количество слов: <b id="tex"></b></div>
+        <script>
+            var btn1 = document.getElementById('btn1');
+            btn1.onclick = function () {             
+                var r = document.getElementById('value1').value; 
+                var mas = r.split(' ');
+                
+                r = mas.length + "."
+                document.getElementById('tex').innerText = r;
+                    console.log(r);
+            }
+        </script>
+       
+    </BODY>
+</HTML>

@@ -1,0 +1,7 @@
+C:\08.05.2024\ToDoList-master\ToDoList\bin\Release\net8.0\win-x86\publish\appsettings.Development.json
+C:\08.05.2024\ToDoList-master\ToDoList\bin\Release\net8.0\win-x86\publish\appsettings.json
+C:\08.05.2024\ToDoList-master\ToDoList\bin\Release\net8.0\win-x86\publish\ToDoList.pdb
+C:\08.05.2024\ToDoList-master\ToDoList\bin\Release\net8.0\win-x86\publish\ToDoList.DAL.pdb
+C:\08.05.2024\ToDoList-master\ToDoList\bin\Release\net8.0\win-x86\publish\ToDoList.Service.pdb
+C:\08.05.2024\ToDoList-master\ToDoList\bin\Release\net8.0\win-x86\publish\ToDoList.Domain.pdb
+C:\08.05.2024\ToDoList-master\ToDoList\bin\Release\net8.0\win-x86\publish\ToDoList.exe

@@ -1,0 +1,30 @@
+<HTML>
+
+<HEAD>
+</HEAD>
+
+<BODY>
+    <img src="Turanov JS\img\otrazhenie-zakata-i-gor-v-ozere.jpg" alt="" id="image1" width="50" height="100">
+    <img src="Turanov JS\img\1617070032_58-p-oboi-izobrazhenie-prirodi-59.jpg" alt="" id="image2" width="50" height="100">
+    <img src="Turanov JS\img\1bbe0c30fd8b9cd89656e6dc6d5e59a7.jpeg" alt="" id="image3" width="50" height="100">
+    <img src="" alt="Нету изображения" id="result">
+    <script language="JavaScript">
+        var image1 = document.getElementById("image1");
+        var image2 = document.getElementById("image2");
+        var image3 = document.getElementById("image3");
+
+        image1.addEventListener("click", function () {
+            document.getElementById("result").src = 'Turanov JS\\img\\otrazhenie-zakata-i-gor-v-ozere.jpg';
+        });
+
+        image2.addEventListener("click", function () {
+            document.getElementById("result").src = 'Turanov JS\\img\\1617070032_58-p-oboi-izobrazhenie-prirodi-59.jpg';
+        });
+
+        image3.addEventListener("click", function () {
+            document.getElementById("result").src = 'Turanov JS\\img\\1bbe0c30fd8b9cd89656e6dc6d5e59a7.jpeg';
+        });
+    </script>
+</BODY>
+
+</HTML>

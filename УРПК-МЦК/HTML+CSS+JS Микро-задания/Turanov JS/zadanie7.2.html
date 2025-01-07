@@ -1,0 +1,37 @@
+<HTML>
+    <HEAD>
+    <TITLE></TITLE>
+    <script>
+        // Функция изменения цвета фона веб-страницы
+        function btnClick()
+        {
+            var SelectedColor = document.getElementById("Clr").value;
+            document.getElementById("mytable").style.backgroundColor  = SelectedColor;
+        }
+    </script>
+    <BODY>
+        <form name="form1">
+            <input type="color" id="Clr"/>
+        </form>
+        
+
+        <input type="button" value="Изменить цвет" OnClick = btnClick()>
+    <table id="mytable" border="1px solid grey" width="30%" height="30%">
+        <tr>
+            <th id="id1"></th>
+            <th id="id2"></th>
+            <th id="id3"></th>
+        </tr>
+        <tr>
+            <th id="id4"></th>
+            <th id="id5"></th>
+            <th id="id6"></th>
+        </tr>
+        <tr>
+            <th id="id7"></th>
+            <th id="id8"></th>
+            <th id="id9"></th>
+        </tr>
+    </table>
+    </BODY>
+    </HTML>

@@ -1,0 +1,19 @@
+<HTML>
+    <HEAD>
+    </HEAD>
+    <BODY>
+        Введите текст: <input type="text" id="value1" value=""></input>
+        <button id="btn1">Выполнить</button>
+        <div>Итоговый текст: <b id="tex"></b></div>
+        <script>
+            var btn1 = document.getElementById('btn1');
+            btn1.onclick = function () {             
+                var value1 = document.getElementById('value1').value;
+                value1 = value1.replaceAll("  ", " ");
+
+                document.getElementById('tex').innerText = value1;
+                    console.log(value1);
+            }
+        </script>
+    </BODY>
+</HTML>

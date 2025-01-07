@@ -1,0 +1,37 @@
+<HTML>
+    <HEAD>
+    <script language="JavaScript">
+    function maxval (obj)
+    {
+    var a = Number(obj.num1.value);
+    var b = Number(obj.num2.value);
+    var c = Number(obj.num3.value);
+    var d = Number(obj.num4.value);
+    var e = Number(obj.num5.value);
+    var count = 1;
+    var max = Math.max(a, Math.max(b, Math.max(c, Math.max(d, e))));
+    if (max == a){count++}
+    if (max == b){count++}
+    if (max == c){count++}
+    if (max == d){count++}
+    obj.res.value=max
+    obj.count.value=count}
+    </script>
+    </HEAD>
+    <BODY>
+    <H4>Вычисление максимального значения</H4>
+    <FORM name="form1">
+    Число 1: <input type="text" size=8 name="num1"><hr>
+    Число 2: <input type="text" size=8 name="num2"><hr>
+    Число 3: <input type="text" size=8 name="num3"><hr>
+    Число 4: <input type="text" size=8 name="num4"><hr>
+    Число 5: <input type="text" size=8 name="num5"><hr>
+    Максимальное значение равно
+    <input type="button" value=Определить onClick="maxval(form1)">
+    <input type="text" size=8 name="res">
+    их количество:
+    <input type="text" size=8 name="count"><hr>
+    <input type="reset">
+    </FORM>
+    </BODY>
+    </HTML>

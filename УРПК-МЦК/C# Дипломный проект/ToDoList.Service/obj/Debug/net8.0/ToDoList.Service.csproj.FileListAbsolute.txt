@@ -1,0 +1,51 @@
+D:\SQL2022\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Service.deps.json
+D:\SQL2022\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Service.dll
+D:\SQL2022\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Service.pdb
+D:\SQL2022\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.DAL.dll
+D:\SQL2022\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Domain.dll
+D:\SQL2022\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.DAL.pdb
+D:\SQL2022\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Domain.pdb
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.csproj.AssemblyReference.cache
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.AssemblyInfoInputs.cache
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.AssemblyInfo.cs
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.csproj.CoreCompileInputs.cache
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.0AE03B1F.Up2Date
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.dll
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\refint\ToDoList.Service.dll
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.pdb
+D:\SQL2022\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ref\ToDoList.Service.dll
+C:\08.05.2024\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Service.deps.json
+C:\08.05.2024\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Service.dll
+C:\08.05.2024\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Service.pdb
+C:\08.05.2024\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.DAL.dll
+C:\08.05.2024\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Domain.dll
+C:\08.05.2024\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.DAL.pdb
+C:\08.05.2024\ToDoList-master\ToDoList.Service\bin\Debug\net8.0\ToDoList.Domain.pdb
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.csproj.AssemblyReference.cache
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.AssemblyInfoInputs.cache
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.AssemblyInfo.cs
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.csproj.CoreCompileInputs.cache
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.0AE03B1F.Up2Date
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.dll
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\refint\ToDoList.Service.dll
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.pdb
+C:\08.05.2024\ToDoList-master\ToDoList.Service\obj\Debug\net8.0\ref\ToDoList.Service.dll
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\bin\Debug\net8.0\ToDoList.Service.deps.json
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\bin\Debug\net8.0\ToDoList.Service.dll
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\bin\Debug\net8.0\ToDoList.Service.pdb
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\bin\Debug\net8.0\ToDoList.DAL.dll
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\bin\Debug\net8.0\ToDoList.Domain.dll
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\bin\Debug\net8.0\ToDoList.DAL.pdb
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\bin\Debug\net8.0\ToDoList.Domain.pdb
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.csproj.AssemblyReference.cache
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.AssemblyInfoInputs.cache
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.AssemblyInfo.cs
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.csproj.CoreCompileInputs.cache
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.dll
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\refint\ToDoList.Service.dll
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.pdb
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\ref\ToDoList.Service.dll
+C:\Users\mazun\Desktop\Портфолио\Информационная система обратной связи\ToDoList.Service\obj\Debug\net8.0\ToDoList.Service.csproj.CopyComplete

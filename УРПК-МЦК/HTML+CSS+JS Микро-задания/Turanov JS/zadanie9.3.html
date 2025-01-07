@@ -1,0 +1,23 @@
+<HTML>
+
+<HEAD>
+</HEAD>
+
+<BODY>
+    <div>Количество счастливых билетов: <b id="sh"></b> из 999999</div>
+    <script>
+        let count = 0;
+
+        for (let i = 100000; i <= 999999; i++) {
+            let num = i.toString();
+            let sum1 = parseInt(num[0]) + parseInt(num[1]) + parseInt(num[2]);
+            let sum2 = parseInt(num[3]) + parseInt(num[4]) + parseInt(num[5]);
+            if (sum1 === sum2) {
+                count++;
+            }
+        }
+        document.getElementById('sh').innerHTML = count;
+    </script>
+</BODY>
+
+</HTML>

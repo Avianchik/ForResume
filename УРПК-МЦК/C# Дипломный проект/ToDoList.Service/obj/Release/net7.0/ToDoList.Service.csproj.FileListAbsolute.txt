@@ -1,0 +1,17 @@
+C:\ToDoList-master\ToDoList.Service\bin\Release\net7.0\ToDoList.Service.deps.json
+C:\ToDoList-master\ToDoList.Service\bin\Release\net7.0\ToDoList.Service.dll
+C:\ToDoList-master\ToDoList.Service\bin\Release\net7.0\ToDoList.Service.pdb
+C:\ToDoList-master\ToDoList.Service\bin\Release\net7.0\ToDoList.DAL.dll
+C:\ToDoList-master\ToDoList.Service\bin\Release\net7.0\ToDoList.Domain.dll
+C:\ToDoList-master\ToDoList.Service\bin\Release\net7.0\ToDoList.DAL.pdb
+C:\ToDoList-master\ToDoList.Service\bin\Release\net7.0\ToDoList.Domain.pdb
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\ToDoList.Service.csproj.AssemblyReference.cache
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\ToDoList.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\ToDoList.Service.AssemblyInfoInputs.cache
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\ToDoList.Service.AssemblyInfo.cs
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\ToDoList.Service.csproj.CoreCompileInputs.cache
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\ToDoList.0AE03B1F.Up2Date
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\ToDoList.Service.dll
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\refint\ToDoList.Service.dll
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\ToDoList.Service.pdb
+C:\ToDoList-master\ToDoList.Service\obj\Release\net7.0\ref\ToDoList.Service.dll

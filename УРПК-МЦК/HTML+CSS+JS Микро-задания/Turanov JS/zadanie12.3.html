@@ -1,0 +1,25 @@
+<HTML>
+
+<HEAD>
+</HEAD>
+
+<BODY>
+   
+    <div>Элементы массива: <b id="value1"></b></div><br>
+    <div>Положительные элементы массива: <b id="value2"></b></div>
+    <script>
+        let arr = [6, 4 , 7 ,6 -1 , -12, 0 ,0, -5];
+        let count = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                count++;
+            }
+        }
+        document.getElementById('value1').innerHTML = arr;
+        document.getElementById('value2').innerHTML = count;
+    </script>
+   
+</BODY>
+
+</HTML>

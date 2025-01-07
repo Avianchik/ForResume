@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+@using System.IdentityModel.Tokens.Jwt
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using Azure.Core
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using ToDoList.Controllers
+@using ToDoList.Domain.Entity
+@using ToDoList.Domain.ViewModels.User
+@using System.Net.Http;
+
+
+
+@{
+    
+    
+    // Получение JWT токена из куки или другого источника
+    var jwtToken = HttpContextAccessor.HttpContext.Request.Cookies["tasty-cookies"];
+
+        // Декодирование JWT токена
+        var handler = new JwtSecurityTokenHandler();
+        var jsonToken = handler.ReadToken(jwtToken);
+        var tokenS = jsonToken as JwtSecurityToken;
+
+        // Получение данных из декодированного токена с использованием System.Text.Json
+        var userId = tokenS.Claims.First(claim => claim.Type == "userId").Value;
+        
+        var findUserInfoUrl = Url.Action("FindUserInfo", "User", new { id = userId });
+}
+
+<html lang="en" class="htm">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] в системе обратной связи</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/ToDoList.styles.css" asp-append-version="true"/>
+        <link href="/done.png" rel="shortcut icon" runat="server" type="image/x-icon"/>
+        <link href="/done.png" rel="icon" runat="server" type="image/ico" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css"/> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <style> input::-webkit-calendar-picker-indicator {
+              display: none !important;
+              
+            }
+            
+            </style>
+</head>
+<body class="bg-light bd">
+<header>
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand">Система обратной связи</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="Tasks">Задачи</a>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="regUsers" class="nav-link text-dark" asp-area="" style="display: none" asp-controller="User" asp-action="RegUsers">Регистрация пользователя</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="users" class="nav-link text-dark" asp-area="" style="display: none" asp-controller="User" asp-action="Users">Пользователи</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="dep" class="nav-link text-dark" asp-area="" style="display: none" asp-controller="Dep" asp-action="Dep">Отделы</a>
+                    </li>
+
+                    <nav class="header-nav ms-auto">
+                        <ul class="d-flex align-items-center">
+
+
+                            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                                <span class="d-none d-md-block dropdown-toggle ps-2" id="nameUser"></span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                                <li class="dropdown-header">
+                                    <h6 id="DepartamentIdUser"></h6>
+                                    <span id="roleUser"></span>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+
+                                <li >
+                                    <form id="logoutForm" asp-area="" asp-controller="User" asp-action="Logout" method="post" style=" cursor: pointer;">
+                                        <button type="submit" class="nav-link text-dark" style="border: none; background: none;">
+                                            <i class="bi bi-box-arrow-right"></i>
+                                            <span>Выйти</span>
+                                        </button>
+                                    </form>
+                                </li>
+
+                            </ul><!-- End Profile Dropdown Items -->
+
+                        </ul>
+                    </nav>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+            @RenderBody()
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jsonwebtoken@9.0.2/index.min.js"></script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+                <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/Russian.json"></script>
+                <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            
+           <script>
+           var userId=@userId;
+           const swalWithBootstrapButtons2 = Swal.mixin({
+                             customClass: {
+                               confirmButton: "btn btn-success m",
+                               denyButton:"btn btn-danger ms-5"
+                             },
+                             buttonsStyling: false
+                           });
+               document.getElementById('logoutForm').addEventListener('click', function(e) {
+                   e.preventDefault();
+                   swalWithBootstrapButtons2.fire({
+                                                     title: "Вы уверены, что хотите выйти?",
+                                                     icon: "warning",
+                                                     confirmButtonText: "Да",
+                                                     showDenyButton: true,
+                                                       denyButtonText: `Нет`,
+                                                     reverseButtons: false
+                                                   }).then((result) => {
+                                                     if (result.isConfirmed) {
+                                                         this.submit();
+                                                         }})
+               });
+           </script>
+            <script>
+                
+                $(document).ready(function() {
+                    // Отправка AJAX запроса к серверу для получения данных пользователя
+                    $.ajax({
+                        url: '@findUserInfoUrl',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            // Присвоение полученных данных переменной userData
+                            var userData= data;
+                            $('#nameUser').text(userData.fio);
+                            $('#DepartamentIdUser').text("Отдел "+ userData.departamentId);
+                            var roleDisplayName = getRoleDisplayName(userData.role);
+                            
+                            $('#roleUser').text(roleDisplayName);
+
+                
+                            // Функция для получения Display Name роли из числового значения
+                            function getRoleDisplayName(roleValue) {
+                                switch (roleValue) {
+                                    case 'GlavDeportament':
+                                        return 'Начальник отдела';
+                                    case 'ZamGlavDeportament':
+                                        return 'Заместитель начальника отдела';
+                                    case 'GlavBuro':
+                                        return 'Начальник бюро';
+                                    case 'Worker':
+                                        return 'Сотрудник';
+                                    case 'Administrator':
+                                        return 'Администратор';
+                                    default:
+                                        return 'Неизвестная роль';
+                                }
+                            }
+                            if (userData.role == 'Administrator') {
+                                $('#dep, #regUsers, #users').show();
+                            }
+                            
+                            // Здесь вы можете использовать полученные данные для отображения на странице
+                            // Например, вы можете заполнить поля формы или обновить определенные элементы на странице
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('Ошибка при получении данных пользователя: ' + error);
+                        }
+                    });
+                });
+            </script>
+           
+            
+            
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

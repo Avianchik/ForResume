@@ -1,0 +1,36 @@
+<HTML>
+    <HEAD>
+    </HEAD>
+    <BODY>
+        <script language="JavaScript">
+            var array = new Array(5);
+            var i;
+            for(i = 0; i < 5; i++)
+            {
+                array[i] = prompt("Введите " + (i + 1) + " -е число:");
+            }
+
+            var max = array[0];
+                
+            for(var i = 0; i < array.length; i++){
+                document.write(array[i]);
+                if(i!=array.length-1)document.write(", \n");
+                if(max <= array[i]) {
+                    max = array[i];
+                }
+            }
+            
+            var count = 0;
+
+            for(var i = 0; i < array.length; i++){
+                if(array[i] === max) {
+                    count++;
+                }
+            }
+
+            
+            document.writeln("\n Максимальное число:", max,"\n");
+            document.writeln("Количество повторений:", count);
+        </script>
+    </BODY>
+</HTML>

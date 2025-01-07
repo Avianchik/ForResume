@@ -1,0 +1,35 @@
+<HTML>
+
+<HEAD>
+    <title>Первый сценарий в документе</title>
+</HEAD>
+
+<BODY>
+    <P>Страница, содержащая сценарий.</P>
+    <div>Дата: <b id="value1"></b></div>
+    <div>Знак зодикак: <b id="value2"></b></div>
+    <script>
+        function getZodiacSign(day, month) {
+            const zodiacSigns = [
+                'Овен', 'Телец', 'Близнецы', 'Рак', 'Лев', 'Дева',
+                'Весы', 'Скорпион', 'Стрелец', 'Козерог', 'Водолей', 'Рыбы'
+            ];
+            const lastDayOfSign = [
+                20, 19, 20, 21, 22, 22,
+                22, 22, 21, 21, 20, 19
+            ];
+            return (day > lastDayOfSign[month - 1]) ? zodiacSigns[month] : zodiacSigns[month - 1];
+        }
+
+        const date = new Date('2004-9-6');
+        document.getElementById('value1').innerHTML = date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
+
+        const zodiacSign = getZodiacSign(date.getDate(), date.getMonth() + 1);
+
+
+        document.getElementById('value2').innerHTML = zodiacSign;
+    </script>
+    <P>Конец формирования страницы, содержащей сценарий</P>
+</BODY>
+
+</HTML>

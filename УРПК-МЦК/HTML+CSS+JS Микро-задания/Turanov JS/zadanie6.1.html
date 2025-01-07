@@ -1,0 +1,63 @@
+<HTML>
+
+<HEAD>
+    <title>Первый сценарий в документе</title>
+</HEAD>
+
+<BODY>
+    <form>
+        <label for="course">Курс:</label>
+        <select id="course">
+            <option value="web-development">Веб-разработка</option>
+            <option value="data-science">Наука о данных</option>
+            <option value="design">Дизайн</option>
+        </select><br>
+        <label for="duration">Продолжительность:</label>
+        <input type="number" id="duration" min="1" max="12"> месяцев<br>
+        <label for="language">Язык:</label>
+        <select id="language">
+            <option value="russian">Русский</option>
+            <option value="english">Английский</option>
+        </select><br>
+        <label for="reporting">Форма отчетности:</label>
+        <input type="radio" id="reporting1" name="reporting" value="online">
+        <label for="reporting1">Онлайн</label>
+        <input type="radio" id="reporting2" name="reporting" value="offline">
+        <label for="reporting2">Оффлайн</label>
+        <button type="submit">Отправить</button>
+    </form>
+
+    <script language="JavaScript">
+        var form = document.querySelector('form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var course = document.getElementById('course').value;
+            var duration = document.getElementById('duration').value;
+            var language = document.getElementById('language').value;
+            var reporting = document.querySelector('input[name="reporting"]:checked').value;
+            var price = calculatePrice(course, duration, language, reporting);
+            alert('Стоимость курса: ' + price + ' руб.');
+        });
+        function calculatePrice(course, duration, language, reporting) {
+            var coursePrice = 0;
+            switch (course) {
+                case 'web-development':
+                    coursePrice = 10000;
+                    break;
+                case 'data-science':
+                    coursePrice = 15000;
+                    break;
+                case 'design':
+                    coursePrice = 12000;
+                    break;
+            }
+            var durationPrice = duration * 1000;
+            var languagePrice = (language === 'english') ? 5000 : 0;
+            var reportingPrice = (reporting === 'online') ? 2000 : 0;
+            var totalPrice = coursePrice + durationPrice + languagePrice + reportingPrice;
+            return totalPrice;
+        }
+    </script>
+</BODY>
+
+</HTML>

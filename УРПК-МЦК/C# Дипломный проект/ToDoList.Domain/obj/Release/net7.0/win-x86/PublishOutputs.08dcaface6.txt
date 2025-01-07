@@ -1,0 +1,3 @@
+C:\Users\mazun\Desktop\ТЫК\ToDoList.Domain.deps.json
+C:\Users\mazun\Desktop\ТЫК\ToDoList.Domain.pdb
+C:\Users\mazun\Desktop\ТЫК\ToDoList.Domain.dll

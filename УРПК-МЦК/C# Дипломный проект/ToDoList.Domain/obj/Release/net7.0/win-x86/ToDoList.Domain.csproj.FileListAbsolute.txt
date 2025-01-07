@@ -1,0 +1,11 @@
+C:\ToDoList-master\ToDoList.Domain\bin\Release\net7.0\win-x86\ToDoList.Domain.deps.json
+C:\ToDoList-master\ToDoList.Domain\bin\Release\net7.0\win-x86\ToDoList.Domain.dll
+C:\ToDoList-master\ToDoList.Domain\bin\Release\net7.0\win-x86\ToDoList.Domain.pdb
+C:\ToDoList-master\ToDoList.Domain\obj\Release\net7.0\win-x86\ToDoList.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\ToDoList-master\ToDoList.Domain\obj\Release\net7.0\win-x86\ToDoList.Domain.AssemblyInfoInputs.cache
+C:\ToDoList-master\ToDoList.Domain\obj\Release\net7.0\win-x86\ToDoList.Domain.AssemblyInfo.cs
+C:\ToDoList-master\ToDoList.Domain\obj\Release\net7.0\win-x86\ToDoList.Domain.csproj.CoreCompileInputs.cache
+C:\ToDoList-master\ToDoList.Domain\obj\Release\net7.0\win-x86\ToDoList.Domain.dll
+C:\ToDoList-master\ToDoList.Domain\obj\Release\net7.0\win-x86\refint\ToDoList.Domain.dll
+C:\ToDoList-master\ToDoList.Domain\obj\Release\net7.0\win-x86\ToDoList.Domain.pdb
+C:\ToDoList-master\ToDoList.Domain\obj\Release\net7.0\win-x86\ref\ToDoList.Domain.dll

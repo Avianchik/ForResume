@@ -1,0 +1,41 @@
+<HTML>
+    <HEAD>
+    <TITLE></TITLE>
+    
+    <BODY>
+        
+        <h1>Итого:</h1><h1 id="result"> 0</h1>
+        <input type="button" value="Добавить в корзину" OnClick = btnAdd()>
+        <input type="button" value="Очистить корзину" OnClick = btnUndo()>
+        <h3>Наименование: <input type="text" id="naim"></h3>
+        <h3>Цена: <input type="text" id="chena"></h3>
+        <h3>Количество: <input type="text" id="kolvo"></h3>
+        <h4 id="korzina"></h4>
+        <script>
+            let chennikRez = 0;
+            let korzinaText = "";
+            let pusto = "";
+            // Функция изменения цвета фона веб-страницы
+            function btnAdd()
+            {
+                let ch = parseInt(document.getElementById('chena').value);
+                let kl= parseInt(document.getElementById('kolvo').value);
+                korzinaText += document.getElementById('naim').value+", ";
+                
+                chennikRez = ch * kl + chennikRez;
+    
+                document.getElementById("korzina").innerHTML = korzinaText;
+                document.getElementById("result").innerHTML = chennikRez;
+            }
+            function btnUndo()
+            {
+                
+                korzinaText=" ";
+                chennikRez=0;
+
+                document.getElementById("korzina").innerHTML = korzinaText;
+                document.getElementById("result").innerHTML = chennikRez;
+            }
+        </script>
+    </BODY>
+    </HTML>

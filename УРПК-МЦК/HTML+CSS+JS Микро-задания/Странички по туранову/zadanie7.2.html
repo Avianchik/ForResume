@@ -1,0 +1,130 @@
+<head><title>Задание 2. Создание таблицы по образцу
+</title></head>
+<body>
+    <p align="center"> Примеры таблиц</p>
+    <hr width="100%" height="4">
+    <p><b>Стандартная таблица</b></p>
+    <p></p>
+    <p><b>Заголовок таблицы</b></p>
+    <table border="2" cellspacing="0"  height="10" width="15%" unit=en>
+        <tr align="center" valign="middle" bgcolor="yellow">
+            <th>Заголовок 1</th>
+            <th>Заголовок 2</th>
+        </tr>
+        <tr align="left">
+            <td>Ячейка 1</td>
+            <td>Ячейка 2</td>
+        </tr>
+        <tr align="left">
+            <td>Ячейка 3</td>
+            <td>Ячейка 4</td>
+        </tr>
+    </table>
+    <hr width="100%" height="4">
+    <p></p>
+    <h4>Объединение ячеек</h4>
+    <table border="1" cellspacing="0"  height="10" width="30%" unit=en>
+        <tr align="center" valign="middle" bgcolor="yellow">
+            <th>Заголовок 1</th>
+            <th>Заголовок 2</th>
+            <th>Заголовок 3</th>
+        </tr>
+        <tr align="left">
+            <td align="center" rowspan="4" colspan="2" bgcolor="cyan">Ячейка 1</td>
+            <td><font color="white">_</font></td>
+        </tr>
+        <tr align="left">
+            <td>Ячейка 2</td>
+        </tr>
+        <tr align="left">
+            <td>Ячейка 3</td>
+        </tr>
+        <tr align="left">
+            <td>Ячейка 4</td>
+        </tr>
+        <tr align="center">
+            <td colspan="3" bgcolor="cyan">Ячейка 5</td>
+        </tr>
+    </table>
+    <hr width="100%" height="4">
+    <h4>Вложенная таблица</h4>
+    <table valign="bottom" frame="all" cellpadding="10" border="1" cellspacing="0" bordercolor="grey" height="10" width="40%" unit=en>
+        <tr>
+            <td><table  width="100%" rules="cols" frame="void" cellpadding="4" bordercolor="black">
+                <tr align="center">
+                    <th>Ячейка</th>
+                    <th>Ячейка</th>
+                    <th>Ячейка</th>
+                    <th>Ячейка</th>
+                </tr>
+                <tr align="center">
+                    <th>1.1.1</th>
+                    <th>1.1.2</th>
+                    <th>1.1.3</th>
+                    <th>1.1.4</th>
+                </tr>
+            </table></td>
+            <td><table width="100%" bordercolor="black" border="1" cellspacing="0" cellpadding="4">
+                <tr>
+                    <th>Ячейка 3.1.1</th>
+                    <th>Ячейка 3.1.2</th>
+                    <th>Ячейка 3.1.3</th>
+                </tr>
+                <tr>
+                    <td>Ячейка 3.2.1</td>
+                    <td>Ячейка 3.2.2</td>
+                    <td>Ячейка 3.2.3</td>
+                </tr>
+            </table></td>   
+        </tr>
+        <tr>
+            <td align="center">
+                <table frame="void" rules="cols" width="100%"  bordercolor="black" border="1" cellspacing="0" cellpadding="0">
+                    <tr >
+                        <td>
+                            <table width="100%" frame="void" rules="rows"   bordercolor="black" border="1" cellspacing="0" cellpadding="4">
+                                <tr >
+                                    <th >Ячейка 2.1.1</th>
+                                </tr>
+                                <tr >
+                                    <td align="center">Ячейка 2.2.1</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table frame="void" width="100%" rules="rows"   bordercolor="black" border="1" cellspacing="0" cellpadding="4">
+                                <tr >
+                                    <th >Ячейка 2.1.2</th>
+                                </tr>
+                                <tr >
+                                    <td align="center">Ячейка 2.2.2</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td align="center">
+                <table width="100%" frame="hsides" rules="rows"   bordercolor="black" border="1" cellspacing="0" cellpadding="4">
+                    <tr align="center">
+                        <td>Ячейка 4.1.1</td>
+                        <td>Ячейка 4.1.2</td>
+                    </tr>
+                    <tr>
+                        <th>Ячейка 4.2.1</th>
+                        <th>Ячейка 4.2.2</th>
+                    </tr>
+                    <tr align="center">
+                        <td>Ячейка 4.3.1</td>
+                        <td>Ячейка 4.3.2</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <P></P>
+    <hr width="100%" height="4">
+    <h4>Табличка</h4>
+    <table border="2" width="20%"  cellspacing="0"><tr><td bgcolor="yellow">Петровым 2 звонка</td></tr></table>
+    <hr width="100%" height="4">
+</body>

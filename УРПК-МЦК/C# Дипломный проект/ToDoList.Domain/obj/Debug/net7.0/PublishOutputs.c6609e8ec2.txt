@@ -1,0 +1,3 @@
+C:\ToDoList-master\ToDoList.Domain\bin\Debug\net7.0\publish\ToDoList.Domain.dll
+C:\ToDoList-master\ToDoList.Domain\bin\Debug\net7.0\publish\ToDoList.Domain.deps.json
+C:\ToDoList-master\ToDoList.Domain\bin\Debug\net7.0\publish\ToDoList.Domain.pdb

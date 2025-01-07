@@ -1,0 +1,22 @@
+<HTML>
+    <HEAD>
+    <script language="JavaScript">
+    function care (a, b)
+    {
+        var c = b
+        b = a
+        a = c
+        document.form1.a.value = a
+        document.form1.b.value = b
+    }
+    </script>
+    </HEAD>
+    <BODY>
+    <FORM name="form1">
+        A: <input type="text" size=5 name="a">
+        B: <input type="text" size=5 name="b"><hr>
+    <input type="button" value=Вычислить
+    onblur="care(document.form1.a.value, document.form1.b.value)">
+    </FORM>
+    </BODY>
+    </HTML> 

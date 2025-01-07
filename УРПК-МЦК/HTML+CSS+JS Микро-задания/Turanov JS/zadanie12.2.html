@@ -1,0 +1,37 @@
+<HTML>
+
+<HEAD>
+</HEAD>
+
+<BODY>
+    <img id="picture" src="img/anim_1.png">
+    <script>
+        // Создаем массив с кадрами мультика и иллюстрациями
+        let frames = [
+        "img/anim_1.png",
+        "img/anim_2.png",
+        "img/anim_3.png",
+        "img/anim_4.png",
+        "img/anim_5.png",
+        "img/anim_6.png",
+        "img/anim_7.png",
+        "img/anim_8.png",
+        "img/anim_9.png",
+        "img/anim_10.png",
+        ];
+
+        var i = 0;
+        function f() {
+            if (i < frames.length) {
+                var c = frames[i];
+                var elem = document.getElementById('picture');
+                elem.src = c;
+                i++;
+            }else {i = 0;}
+        }
+
+        setInterval(f, 50);
+    </script>
+</BODY>
+
+</HTML>

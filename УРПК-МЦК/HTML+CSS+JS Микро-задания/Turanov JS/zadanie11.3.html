@@ -1,0 +1,26 @@
+<HTML>
+    <HEAD>
+    </HEAD>
+    <BODY>
+     
+        Что заменить: <input type="text" id="value1" value=""></input><br><br>
+        На что заменить: <input type="text" id="value2" value=""></input><br><br>
+        Введите текст: <input type="text" id="value3" value=""></input>
+        <button id="btn1">Выполнить</button>
+        <div>Итоговый текст: <b id="tex"></b></div>
+        <script>
+            var btn1 = document.getElementById('btn1');
+            btn1.onclick = function () {             
+                var value1 = document.getElementById('value1').value;
+                var value2 = document.getElementById('value2').value;
+                var value3 = document.getElementById('value3').value;
+                value3 = value3.replaceAll(value1, value2);
+
+                r = value3 + "."
+                document.getElementById('tex').innerText = value3;
+                    console.log(value3);
+            }
+        </script>
+       
+    </BODY>
+</HTML>

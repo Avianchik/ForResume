@@ -1,0 +1,546 @@
+﻿@using ToDoList.Domain.Enum
+@{
+    ViewData["Title"] = "Пользователи";
+    
+}
+
+<section>
+    <div class="row align-items-stretch h-100 container-fluid">
+        <div class="card shadow-2-strong" style="border-radius: 15px;">
+            <div class="card-body p-4 ps-5 row">
+                <h3 class="">Фильтры</h3>
+                <div class="form-group col-md-4">
+                    <label class="col-form-label">Фильтр по ФИО</label>
+                    <input name="fioFilter" id="fioFilter" type="text" class="form-control" list="suggestionsList5"/>
+                    <datalist id="suggestionsList5"></datalist>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="col-form-label" >Фильтр по роли</label>
+                    <select name="roleFilter" class="form-control mb-3" asp-items="Html.GetEnumSelectList<Role>()">
+                        <option value="">
+                            Все
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="col-form-label">Фильтр по номеру отдела</label>
+                    <input name="depNumFilter" id="depNumFilter" type="text" class="form-control" list="suggestionsList6"/>
+                    <datalist id="suggestionsList6"></datalist>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="col-form-label">Фильтр по названию отдела</label>
+                    <input name="depNameFilter" id="depNameFilter" type="text" class="form-control" list="suggestionsList7"/>
+                    <datalist id="suggestionsList7"></datalist>
+                </div>
+                <div class="form-group col-md-4 text-end">
+                </div>
+                <div class="form-group col-md-4 text-end">
+                    <button class="btn btn-primary btn-lg mt-2 pt-1" id="clearFilters">Очистить фильтры</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class=" p-lg-2">
+    <div class="card" style="border-radius: 15px;">
+        <div class="card-body p-4 ps-5">
+            <table class="table table-hover" style="word-break: break-word;" id="userTableId">
+                <thead>
+                    <tr>
+                        <th style="width: 17%">ФИО✏️</th>
+                        <th style="width: 12%">Логин✏️</th>
+                        <th style="width: 12%">Пароль✏️</th>
+                        <th style="width: 10%">Роль</th>
+                        <th style="width: 10%">Номер отдела</th>
+                        <th style="width: 15%">Название отдела</th>
+                        <th style="width: 17%">Начальник</th>
+                        <th style="width: 7%">Удалить</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</section>
+@section Scripts
+{
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/Russian.json"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+    
+            const swalWithBootstrapButtons = Swal.mixin({
+                      customClass: {
+                        confirmButton: "btn btn-success m",
+                        denyButton:"btn btn-danger ms-5"
+                      },
+                      buttonsStyling: false
+                    });
+                    
+            let datatable = $('#userTableId').DataTable({
+                "language": {
+                    "url": "/lib/Russian.json"
+                },
+                info: false,
+                serverSide: true,
+                searching: false,
+                paging: true,
+                sorting: true,
+                order: [[0, 'asc']],
+                
+                ajax: {
+                    url: "@Url.Action("UserHandler", "User")",
+                    method: 'POST',
+                    data: function(d) {
+                        d.filter = {
+                            fio: $('input[name="fioFilter"]').val(),
+                            role: $('select[name="roleFilter"]').val(),
+                            departamentId: $('input[name="depNumFilter"]').val(),
+                            departamentName: $('input[name="depNameFilter"]').val(),
+                            sortColumn: d.columns[d.order[0].column].data,
+                            sortDirection: d.order[0].dir
+                        };
+                        d.start = d.start;
+                        d.length = d.length;
+                    },
+                },
+                columns: [
+                    { data: 'fio', sortable: true },
+                    { data: 'login', sortable: false },
+                    { data: 'password', sortable: false },
+                    { data: 'role', sortable: true },
+                    { data: 'departamentId', sortable: true },
+                    { data: 'departament', sortable: true },
+                    { data: 'nachalnik', sortable: false },
+                    { data: null, sortable: false, render: function(data, type) { return '<button class="btn btn-danger btn-sm center-block">Удалить</button>' } }
+                ],
+                createdRow: function(nRow, data) {
+                    var changeFIO = function() {
+                        swalWithBootstrapButtons.fire({
+                          title: "Изменение ФИО пользователя " + data.fio,
+                          icon: "warning",
+                          input: "text",
+                            preConfirm: (name) => {
+                                        return name;
+                                    },
+                          confirmButtonText: "Изменить",
+                          showDenyButton: true,
+                            denyButtonText: `Отменить`,
+                          reverseButtons: false
+                             }).then((result) => {
+                          if (result.isConfirmed) {
+                              var name = result.value;
+                              $.ajax({
+                                  type:'POST',
+                                  url:'@Url.Action("UpdateUser", "User")',
+                                  data:{ id: data.id,
+                                  fIO:name,
+                                  operationUpdate:1},
+                                  success: function (response) {
+                                                      Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.description,
+                                                          icon: 'success',
+                                                          confirmButtonText: 'Ок'
+                                                      })
+                                                      datatable.draw();
+                                                  },
+                                                  error: function (response) {
+                                                       Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.responseJSON.description,
+                                                          icon: 'error',
+                                                          confirmButtonText: 'Ок'
+                                                       })
+                                                  }
+                              })
+                          }
+                          });
+                    }
+                    var changeLogin = function() {
+                        swalWithBootstrapButtons.fire({
+                          title: "Изменение логина пользователя " + data.fio,
+                          icon: "warning",
+                          input: "text",
+                            preConfirm: (name) => {
+                                        return name;
+                                    },
+                          confirmButtonText: "Изменить",
+                          showDenyButton: true,
+                            denyButtonText: `Отменить`,
+                          reverseButtons: false
+                             }).then((result) => {
+                          if (result.isConfirmed) {
+                              var name = result.value;
+                              $.ajax({
+                                  type:'POST',
+                                  url:'@Url.Action("UpdateUser", "User")',
+                                  data:{ id: data.id,
+                                  login:name,
+                                  operationUpdate:2},
+                                  success: function (response) {
+                                                      Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.description,
+                                                          icon: 'success',
+                                                          confirmButtonText: 'Ок'
+                                                      })
+                                                      datatable.draw();
+                                                  },
+                                                  error: function (response) {
+                                                       Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.responseJSON.description,
+                                                          icon: 'error',
+                                                          confirmButtonText: 'Ок'
+                                                       })
+                                                  }
+                              })
+                          }
+                          });
+                    }
+                    
+                    var changePassword = function() {
+                        swalWithBootstrapButtons.fire({
+                          title: "Изменение пароля пользователя " + data.fio,
+                          icon: "warning",
+                          input: "text",
+                            preConfirm: (name) => {
+                                        return name;
+                                    },
+                          confirmButtonText: "Изменить",
+                          showDenyButton: true,
+                            denyButtonText: `Отменить`,
+                          reverseButtons: false
+                             }).then((result) => {
+                          if (result.isConfirmed) {
+                              var name = result.value;
+                              $.ajax({
+                                  type:'POST',
+                                  url:'@Url.Action("UpdateUser", "User")',
+                                  data:{ id: data.id,
+                                  password:name,
+                                  operationUpdate:3},
+                                  success: function (response) {
+                                                      Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.description,
+                                                          icon: 'success',
+                                                          confirmButtonText: 'Ок'
+                                                      })
+                                                      datatable.draw();
+                                                  },
+                                                  error: function (response) {
+                                                       Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.responseJSON.description,
+                                                          icon: 'error',
+                                                          confirmButtonText: 'Ок'
+                                                       })
+                                                  }
+                              })
+                          }
+                          });
+                    }
+                    var changeGlobal = function() {
+                        swalWithBootstrapButtons.fire({
+                          title: "Изменение Глобалка " + data.fio,
+                          width: '80%',
+                          icon: "warning",
+                          html:
+                              '<div class="row justify-content-center">' +
+                              '<select id="roleSearch" style="width:80%" class="form-control form-control-lg" name="role" asp-items="Html.GetEnumSelectList<Role>()"></select>' +
+                              '<div class="row col-md-12 mb-2 form-outline">' +
+                              '<div class="row col-md-6 mb-2 form-outline">' +
+                              '<label class="form-label">Номер выбранного отдела</label>' +
+                              '<input style="pointer-events: none;" type="text" id="depIdInput" readonly="" name="DepartamentId" class="form-control form-control-lg"/>' +
+                              '</div>' +
+                              '<div class="row col-md-6 mb-2 form-outline">' +
+                              '<label class="form-label">Название выбранного отдела</label>' +
+                              '<input type="text" id="depNameInput" disabled name="Departament" class="form-control form-control-lg"/>' +
+                              '</div>' +
+                              '</div>' +
+                              '<div class="row">' +
+                              '<div class="col-md-12 mb-2">' +
+                              '<div class="form-outline">' +
+                              '<label class="form-label">Отдел</label>' +
+                              '<div class="">' +
+                              '<div class="card shadow-2-strong  container-fluid" style="border-radius: 15px;">' +
+                              '<div class="card-body row">' +
+                              '<div class="form-group col-md-4">' +
+                              '<label class="col-form-label">Фильтр по номеру</label>' +
+                              '<input name="idDep" type="text" class="form-control"/>' +
+                              '</div>' +
+                              '<div class="form-group col-md-4">' +
+                              '<label class="col-form-label">Фильтр по названию</label>' +
+                              '<input name="nameDep" type="text" class="form-control"/>' +
+                              '</div>' +
+                              '<div class="form-group col-md-4">' +
+                              '<button class="btn btn-primary btn-lg mt-2 pt-1" id="clearFilters">Очистить фильтры</button>' +
+                              '</div>' +
+                              '</div>' +
+                              '</div>' +
+                              '</div>' +
+                              '<div class="container-fluid">' +
+                              '<table class="table  table-hover " id="depTableId">' +
+                              '<thead>' +
+                              '<tr>' +
+                              '<th style="width: 10%;">Номер</th>' +
+                              '<th style="width: 50%;">Название</th>' +
+                              '<th style="width: 3%;">Выбрать</th>' +
+                              '</tr>' +
+                              '</thead>' +
+                              '<tbody></tbody>' +
+                              '</table>' +
+                              '</div>' +
+                              '</div>' +
+                              '</div>' +
+                              '<div class="row" name="nach">' +
+                              '<div class="col-md-12 mb-2">' +
+                              '<div class="form-outline">' +
+                              '<label class="form-label">Начальник</label>' +
+                              '<div class="row col-md-12 mb-2 form-outline">' +
+                              '<div class="row col-md-6 mb-2 form-outline">' +
+                              '<label class="form-label">Выбранный начальник</label>' +
+                              '<input style="pointer-events: none;" type="text" id="nachNameInput" readonly="" name="aa" class="form-control form-control-lg"/>' +
+                              '<input style="pointer-events: none;" type="text" id="nachIdInput" readonly="" name="NachalnikId" class="form-control form-control-lg"/>' +
+                              '</div>' +
+                              '</div>' +
+                              '<div class="">' +
+                              '<div class="card shadow-2-strong  container-fluid" style="border-radius: 15px;">' +
+                              '<div class="card-body row">' +
+                              '<div class="form-group col-md-4">' +
+                              '<label class="col-form-label">Фильтр по ФИО</label>' +
+                              '<input name="FIOFilter" type="text" class="form-control"/>' +
+                              '</div>' +
+                              '<div class="form-group col-md-4">' +
+                              '<button class="btn btn-primary btn-lg mt-2 pt-1" id="clearFilter">Очистить фильтр</button>' +
+                              '</div>' +
+                              '</div>' +
+                              '</div>' +
+                              '</div>' +
+                              '<div class="container-fluid">' +
+                              '<table class="table  table-hover " id="nachTableId">' +
+                              '<thead>' +
+                              '<tr>' +
+                              '<th style="width: 90%;">ФИО</th>' +
+                              '<th style="width: 10%;">Выбрать</th>' +
+                              '</tr>' +
+                              '</thead>' +
+                              '<tbody></tbody>' +
+                              '</table>' +
+                              '</div>' +
+                              '</div>' +
+                              '</div>' +
+                              '</div>'+
+                              '</div>',
+                          confirmButtonText: "Изменить",
+                          showDenyButton: true,
+                            denyButtonText: `Отменить`,
+                          reverseButtons: false
+                             }).then((result) => {
+                          if (result.isConfirmed) {
+                              var name = result.value;
+                              $.ajax({
+                                  type:'POST',
+                                  url:'@Url.Action("UpdateUser", "User")',
+                                  data:{ id: data.id,
+                                  login:name,
+                                  operationUpdate:4},
+                                  success: function (response) {
+                                                      Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.description,
+                                                          icon: 'success',
+                                                          confirmButtonText: 'Ок'
+                                                      })
+                                                      datatable.draw();
+                                                  },
+                                                  error: function (response) {
+                                                       Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.responseJSON.description,
+                                                          icon: 'error',
+                                                          confirmButtonText: 'Ок'
+                                                       })
+                                                  }
+                              })
+                          }
+                          });
+                    }
+                    
+                    var handlerDelete = function() {
+                        swalWithBootstrapButtons.fire({
+                            title: "Вы уверены?",
+                            icon: "warning",
+                            confirmButtonText: "Да",
+                            showDenyButton: true,
+                            denyButtonText: `Нет`,
+                            reverseButtons: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '@Url.Action("DeleteUser", "User")',
+                                    data: { id: data.id },
+                                    success: function(response) {
+                                        Swal.fire({
+                                            title: 'Информация',
+                                            text: response.description,
+                                            icon: 'success',
+                                            confirmButtonText: 'Ок'
+                                        })
+                                        datatable.draw();
+                                    },
+                                    error: function(response) {
+                                        Swal.fire({
+                                            title: 'Информация',
+                                            text: response.responseJSON.description,
+                                            icon: 'error',
+                                            confirmButtonText: 'Ок'
+                                        })
+                                    }
+                                })
+                            }
+                        });
+                    }
+                    
+                    for (var i = 0; i < datatable.columns().header().length; i++) {
+                        if (i === 0) {
+                            $('td', nRow).eq(i).on('click', changeFIO);
+                        } else if (i === 1) {
+                            $('td', nRow).eq(i).on('click', changeLogin);
+                        } else if (i === 2) {
+                            $('td', nRow).eq(i).on('click', changePassword);
+                        } else if (i === datatable.columns().header().length - 1) {
+                            $('td', nRow).eq(i).find('button').on('click', handlerDelete);
+                        } else {
+                            $('td', nRow).eq(i).css('cursor', 'default');
+                        }
+                    }
+                },
+               
+                    });    
+            
+                        $('input[name="fioFilter"]').on('change',function (){
+                                datatable.draw();
+                        }),
+                        $('select[name="roleFilter"]').on('change',function (){
+                                datatable.draw();
+                        }),
+                        $('input[name="depNumFilter"]').on('change',function (){
+                                datatable.draw();
+                        }),
+                        $('input[name="depNameFilter"]').on('change',function (){
+                                datatable.draw();
+                        }),
+                                                                        
+                        $('#clearFilters').on('click', function (){
+                            var input = document.querySelector('input[name="fioFilter"]');
+                                                    if (input) {
+                                                            input.value = '';
+                                                        }
+                            var roleFilterSelect = document.querySelector('select[name="roleFilter"]');
+                            if (roleFilterSelect) {
+                                roleFilterSelect.value = '';
+                            }      
+                            var input = document.querySelector('input[name="depNumFilter"]');
+                                                    if (input) {
+                                                            input.value = '';
+                                                        }  
+                            var input = document.querySelector('input[name="depNameFilter"]');
+                                                    if (input) {
+                                                            input.value = '';
+                                                        }                          
+                            var input = document.querySelector('input[name="nachalnikFilter"]');
+                                                    if (input) {
+                                                            input.value = '';
+                                                        }
+                                                    datatable.draw();
+                            
+                        
+                        });
+            $('#fioFilter').on('input', function() {
+            var inputVal = this.value.toLowerCase(); // Получаем введенное значение и приводим к нижнему регистру
+            var suggestions = datatable.column(0).data().toArray(); // Получаем значения из первого столбца таблицы
+        
+            if (suggestions === undefined || suggestions === null) {
+                suggestions = [];
+            }
+            // Фильтрация значений из таблицы, которые начинаются с введенного текста
+            var uniqueFilteredSuggestions = [...new Set(suggestions.filter(function(item) {
+                    return item !== null && item.toLowerCase().startsWith(inputVal);
+                }))];
+            
+        
+            // Отображение отфильтрованных значений в виде подсказок
+            // Здесь можно использовать любую библиотеку для отображения подсказок, например, jQuery UI Autocomplete
+            // Ниже приведен простой пример добавления подсказок в элемент <datalist>
+            var datalist = $('#suggestionsList5');
+            datalist.empty(); // Очистка предыдущих подсказок
+        
+            uniqueFilteredSuggestions.forEach(function(item) {
+                datalist.append('<option value="' + item + '">');
+            });
+            
+            });
+           
+              $('#depNumFilter').on('input', function() {
+              var inputVal = this.value.toLowerCase(); // Получаем введенное значение и приводим к нижнему регистру
+              var suggestions = datatable.column(4).data().toArray(); // Получаем значения из первого столбца таблицы
+          
+              if (suggestions === undefined || suggestions === null) {
+                    suggestions = [];
+                }
+                // Фильтрация значений из таблицы, которые начинаются с введенного текста
+                var uniqueFilteredSuggestions = [...new Set(suggestions.filter(function(item) {
+                        return item !== null && item.toLowerCase().startsWith(inputVal);
+                    }))];
+              
+          
+              // Отображение отфильтрованных значений в виде подсказок
+              // Здесь можно использовать любую библиотеку для отображения подсказок, например, jQuery UI Autocomplete
+              // Ниже приведен простой пример добавления подсказок в элемент <datalist>
+              var datalist = $('#suggestionsList6');
+              datalist.empty(); // Очистка предыдущих подсказок
+          
+              uniqueFilteredSuggestions.forEach(function(item) {
+                  datalist.append('<option value="' + item + '">');
+              });
+              
+              });
+              
+            $('#depNameFilter').on('input', function() {
+              var inputVal = this.value.toLowerCase(); // Получаем введенное значение и приводим к нижнему регистру
+              var suggestions = datatable.column(5).data().toArray(); // Получаем значения из первого столбца таблицы
+             if (suggestions === undefined || suggestions === null) {
+                  suggestions = [];
+              }
+              // Фильтрация значений из таблицы, которые начинаются с введенного текста
+              var uniqueFilteredSuggestions = [...new Set(suggestions.filter(function(item) {
+                      return item !== null && item.toLowerCase().startsWith(inputVal);
+                  }))];
+              
+          
+              // Отображение отфильтрованных значений в виде подсказок
+              // Здесь можно использовать любую библиотеку для отображения подсказок, например, jQuery UI Autocomplete
+              // Ниже приведен простой пример добавления подсказок в элемент <datalist>
+              var datalist = $('#suggestionsList7');
+              datalist.empty(); // Очистка предыдущих подсказок
+          
+              uniqueFilteredSuggestions.forEach(function(item) {
+                  datalist.append('<option value="' + item + '">');
+              });
+              
+              });
+    
+        </script>
+<script>
+
+
+          
+</script>
+}

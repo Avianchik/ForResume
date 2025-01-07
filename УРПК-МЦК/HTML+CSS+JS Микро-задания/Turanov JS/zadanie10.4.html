@@ -1,0 +1,95 @@
+<HTML>
+    <HEAD>
+    </HEAD>
+    <BODY>
+
+        <input type="text" id="value1" size="5" value="0"></input>
+        <button id="btn1">Посчитать</button>
+        <div>Название года: <b id="tex"></b></div>
+        <script>   
+            var btn1 = document.getElementById('btn1');
+            btn1.onclick = function () { 
+                var year = parseInt(document.getElementById('value1').value); 
+                var result = "";
+                var n = year; 
+                var m;   
+                if (n > 1983) {
+                    while (n > 1983) {
+                        n -= 60;
+                        m = n - 1923;
+                    }
+                }else {
+                    while (n < 1983) {
+                        n += 60;
+                        m = n - 1983;
+                    }
+                }
+
+                var color = parseInt((m / 12) + 1); 
+                switch (color) {
+                    case 1:
+                        result = "Зелено";
+                    break;
+                    case 2:
+                        result = "Красно";
+                    break;
+                    case 3:
+                        result = "Желто";
+                    break;
+                    case 4:
+                        result = "Бело";
+                    break;
+                    case 5:
+                        result = "Черно";
+                    break;
+                }
+                
+                console.log(color);
+
+                var animal = m % 12;
+                switch (animal) {
+                    case 1: 
+                        result = result + ("й крысы");
+                    break;
+                    case 2: 
+                        result = result + ("й коровы");
+                    break;
+                    case 3: 
+                    result = result + ("го тигра");
+                    break;
+                    case 4: 
+                    result = result + ("го зайца");
+                    break;
+                    case 5: 
+                    result = result + ("го дракона");
+                    break;
+                    case 6: 
+                    result = result + ("й змеи");
+                    break;
+                    case 7: 
+                    result = result + ("й лошади");
+                    break;
+                    case 8: 
+                    result = result + ("й овцы");
+                    break;
+                    case 9: 
+                    result = result + ("й обезьяны");
+                    break;
+                    case 10: 
+                    result = result + ("й курицы");
+                    break;
+                    case 11: 
+                    result = result + ("й собаки");
+                    break;
+                    case 12: 
+                    result = result + ("й свиньи");
+                    break;
+
+                }  
+                
+                document.getElementById('tex').innerText = result;
+                console.log(result);
+            }
+        </script>
+    </BODY>
+</HTML>

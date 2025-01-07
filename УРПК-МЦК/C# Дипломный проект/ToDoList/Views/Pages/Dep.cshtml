@@ -1,0 +1,370 @@
+﻿@using ToDoList.Domain.Enum
+@{
+    ViewData["Title"] = "Отделы";
+}
+<section>
+    <div class="row align-items-stretch h-100 container-fluid">
+    
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow-2-strong" style="border-radius: 15px;">
+            <div class="card-body p-4 ps-5 row">
+                <h3 class="mb-4">Фильтры</h3>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Фильтр по номеру</label>
+                        <input name="idDep" id="idDep" type="text" class="form-control" list="suggestionsList11"/>
+                        <datalist id="suggestionsList11"></datalist>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Фильтр по названию</label>
+                        <input name="nameDep" id="nameDep" type="text" class="form-control" list="suggestionsList12"/>
+                        <datalist id="suggestionsList12"></datalist>
+                    </div>
+                    <div class="form-group col-12">
+                        <button class="btn btn-primary btn-lg mt-3" id="clearFilters">Очистить фильтры</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <div class="col-lg-6 mb-4">
+          <div class="card shadow-sm" style="border-radius: 15px;">
+              <div class="card-body p-4 ">
+                  <h3 class="mb-4">Регистрация отдела</h3>
+                  <form id="createDepForm">
+                      <div class="form-group">
+                          <label for="DepartamentNameInput" class="form-label">Название</label>
+                          <input type="text" id="DepartamentNameInput" name="DepartamentName" class="form-control" />
+                      </div>
+                      
+                      <div class="form-group "> <!-- Добавлен класс text-right -->
+                          <button id="createDep" class="btn btn-primary btn-lg mt-3">Зарегистрировать</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+    
+  </div>
+</section>
+
+<section class=" p-lg-2">
+    <div class="container-fluid card" style="border-radius: 15px;">
+        <div class="card-body p-4 ps-5">
+            
+                <table class="table table-hover" style="word-break: break-word;" id="depTableId">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%;">Номер✏️</th>️
+                        <th style="width: 83%;">Название✏️</th>
+                        <th style="width: 7%;">Удалить</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            
+        </div>
+    </div>
+</section>
+@section Scripts
+{
+
+
+
+    <script>
+    console.log(userId);
+        const swalWithBootstrapButtons = Swal.mixin({
+                  customClass: {
+                    confirmButton: "btn btn-success m",
+                    denyButton:"btn btn-danger ms-5"
+                  },
+                  buttonsStyling: false
+                });
+                
+        let datatable =$('#depTableId').DataTable({
+        "language": {
+                    "url": "/lib/Russian.json"
+                },
+                    info: false,
+                    serverSide: true,
+                    searching: false,
+                    paging: true,
+                    sorting: true,
+                    order: [[0, 'asc']],
+                    ajax:{
+                        url:"@Url.Action("DepHandler", "Dep")",
+                        method:'POST',
+                        data: function (d) {
+                                            d.filter = {
+                                                DepName: $('input[name="nameDep"]').val(),
+                                                idDep:$('input[name="idDep"]').val(),
+                                                sortColumn: d.columns[d.order[0].column].data,
+                                                sortDirection: d.order[0].dir
+                                            };
+                                            d.start = d.start;
+                                            d.length = d.length;   
+                                        },
+                        },
+                        columns:[
+                            { data: 'departamentNumber',sortable: true},
+                            { data: 'departamentName',sortable: true},
+                            { 
+                                data: null,
+                                sortable: false,
+                                render: function (data, type){
+                                        return '<button class="btn btn-danger btn-sm center-block">Удалить</button>'
+                                    }
+                            },
+                            
+                            ],
+                        createdRow: function (nRow, data){
+                        
+                        var changeName = function() {
+                            swalWithBootstrapButtons.fire({
+                              title: "Изменение названия отдела " + data.departamentName,
+                              icon: "warning",
+                              input: 'text',
+                                preConfirm: (name) => {
+                                            return name;
+                                        },
+                              confirmButtonText: "Изменить",
+                              showDenyButton: true,
+                                denyButtonText: `Отменить`,
+                              reverseButtons: false
+                                 }).then((result) => {
+                              if (result.isConfirmed) {
+                                  var name = result.value;
+                                  $.ajax({
+                                      type:'POST',
+                                      url:'@Url.Action("UpdateNameDep", "Dep")',
+                                      data:{ departamentId: data.departamentId,
+                                      departamentName:name},
+                                      success: function (response) {
+                                                          Swal.fire({
+                                                              title: 'Информация',
+                                                              text: response.description,
+                                                              icon: 'success',
+                                                              confirmButtonText: 'Ок'
+                                                          })
+                                                          datatable.draw();
+                                                      },
+                                                      error: function (response) {
+                                                           Swal.fire({
+                                                              title: 'Информация',
+                                                              text: response.responseJSON.description,
+                                                              icon: 'error',
+                                                              confirmButtonText: 'Ок'
+                                                           })
+                                                      }
+                                  })
+                              }
+                              });
+                        }
+                        var changeId = function() {
+                        swalWithBootstrapButtons.fire({
+                          title: "Изменение номера отдела " + data.departamentName,
+                          icon: "warning",
+                          input: 'text',
+                            preConfirm: (name) => {
+                                        return name;
+                                    },
+                          confirmButtonText: "Изменить",
+                          showDenyButton: true,
+                            denyButtonText: `Отменить`,
+                          reverseButtons: false
+                             }).then((result) => {
+                          if (result.isConfirmed) {
+                              var name = result.value;
+                              $.ajax({
+                                  type:'POST',
+                                  url:'@Url.Action("UpdateIdDep", "Dep")',
+                                  data:{ departamentId: data.departamentId,
+                                  departamentName:name
+                                  },
+                                  success: function (response) {
+                                                      Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.description,
+                                                          icon: 'success',
+                                                          confirmButtonText: 'Ок'
+                                                      })
+                                                      datatable.draw();
+                                                  },
+                                                  error: function (response) {
+                                                       Swal.fire({
+                                                          title: 'Информация',
+                                                          text: response.responseJSON.description,
+                                                          icon: 'error',
+                                                          confirmButtonText: 'Ок'
+                                                       })
+                                                  }
+                              })
+                          }
+                          });
+                    }
+                        var handlerDelete = function (){
+                                swalWithBootstrapButtons.fire({
+                                  title: "Вы уверены? (Все привязанные к отделу пользователи тоже удалятся)",
+                                  icon: "warning",
+                                  confirmButtonText: "Да",
+                                  showDenyButton: true,
+                                    denyButtonText: `Нет`,
+                                  reverseButtons: false
+                                }).then((result) => {
+                                  if (result.isConfirmed) {
+                                    $.ajax({
+                                        type:'POST',
+                                        url:'@Url.Action("DeleteDep", "Dep")',
+                                        data:{ id: data.departamentId },
+                                        success: function (response) {
+                                                            Swal.fire({
+                                                                title: 'Информация',
+                                                                text: response.description,
+                                                                icon: 'success',
+                                                                confirmButtonText: 'Ок'
+                                                            })
+                                                            datatable.draw();
+                                                        },
+                                                        error: function (response) {
+                                                             Swal.fire({
+                                                                title: 'Информация',
+                                                                text: response.responseJSON.description,
+                                                                icon: 'error',
+                                                                confirmButtonText: 'Ок'
+                                                             })
+                                                        }
+                                    })
+                                  }  
+                                });    
+                        }
+                        
+                        for (var i = 0; i < datatable.columns().header().length; i++) {
+                          if (i === 0) { // Проверяем, что это первая колонка
+                            $('td:eq(' + i + ')', nRow).on('click', changeId);
+                          } 
+                          if (i === 1 ){
+                            $('td:eq(' + i + ')', nRow).on('click', changeName);
+                          }
+                        }
+                        $('td button', nRow).on('click', handlerDelete);
+                        
+                    }
+                });
+                    $('input[name="nameDep"]').on('change',function (){
+                            datatable.draw();
+                    }),
+                    $('input[name="idDep"]').on('change',function (){
+                                                datatable.draw();
+                                        }),
+                    $('#clearFilters').on('click', function (){
+                        var input = document.querySelector('input[name="idDep"]');
+                                                if (input) {
+                                                        input.value = '';
+                                                    }
+                        var input = document.querySelector('input[name="nameDep"]');
+                                                if (input) {
+                                                        input.value = '';
+                                                    }                        
+                                                datatable.draw();
+                        }),
+    
+        $('#createDep').on('click', function (e) {
+            e.preventDefault();
+            
+            
+            var isValid = true;
+                        var in1 = document.querySelector('#DepartamentNameInput').value;
+                        
+            
+                            if (in1 == "") {
+                                isValid = false;
+                                Swal.fire({
+                                    title: 'Ошибка',
+                                    text: 'Пожалуйста, заполните все обязательные поля.',
+                                    icon: 'error',
+                                    confirmButtonText: 'Ок',
+                                });
+                                return false;
+                            }
+                        
+                        if (isValid) {
+            var dataToSend = JSON.stringify({
+                DepartamentName: $('#DepartamentNameInput').val()
+            });
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CreateDep", "Dep")', // Убедитесь, что этот URL верный
+                contentType: 'application/json',
+                data: dataToSend,
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Информация',
+                        text: response.description,
+                        icon: 'success',
+                        confirmButtonText: 'Ок',
+                    })
+                    datatable.draw();
+                },
+                error: function (response) {
+                    // Обратите внимание, что для доступа к описанию в случае ошибки
+                    // может потребоваться использовать response.responseJSON.description
+                    Swal.fire({
+                        title: 'Ошибка',
+                        text: response.responseJSON.description,
+                        icon: 'error',
+                        confirmButtonText: 'Ок',
+                    })
+                }
+            }); }
+        });
+        $('#idDep').on('input', function() {
+          var inputVal = this.value.toLowerCase(); // Получаем введенное значение и приводим к нижнему регистру
+          var suggestions = datatable.column(0).data().toArray(); // Получаем значения из первого столбца таблицы
+         if (suggestions === undefined || suggestions === null) {
+              suggestions = [];
+          }
+          // Фильтрация значений из таблицы, которые начинаются с введенного текста
+          var uniqueFilteredSuggestions = [...new Set(suggestions.filter(function(item) {
+                  return item !== null && item.toLowerCase().startsWith(inputVal);
+              }))];
+          
+      
+          // Отображение отфильтрованных значений в виде подсказок
+          // Здесь можно использовать любую библиотеку для отображения подсказок, например, jQuery UI Autocomplete
+          // Ниже приведен простой пример добавления подсказок в элемент <datalist>
+          var datalist = $('#suggestionsList11');
+          datalist.empty(); // Очистка предыдущих подсказок
+      
+          uniqueFilteredSuggestions.forEach(function(item) {
+              datalist.append('<option value="' + item + '">');
+          });
+          
+          });
+        $('#nameDep').on('input', function() {
+          var inputVal = this.value.toLowerCase(); // Получаем введенное значение и приводим к нижнему регистру
+          var suggestions = datatable.column(1).data().toArray(); // Получаем значения из первого столбца таблицы
+         if (suggestions === undefined || suggestions === null) {
+              suggestions = [];
+          }
+          // Фильтрация значений из таблицы, которые начинаются с введенного текста
+          var uniqueFilteredSuggestions = [...new Set(suggestions.filter(function(item) {
+                  return item !== null && item.toLowerCase().startsWith(inputVal);
+              }))];
+          
+      
+          // Отображение отфильтрованных значений в виде подсказок
+          // Здесь можно использовать любую библиотеку для отображения подсказок, например, jQuery UI Autocomplete
+          // Ниже приведен простой пример добавления подсказок в элемент <datalist>
+          var datalist = $('#suggestionsList12');
+          datalist.empty(); // Очистка предыдущих подсказок
+      
+          uniqueFilteredSuggestions.forEach(function(item) {
+              datalist.append('<option value="' + item + '">');
+          });
+          
+          });
+    </script>
+
+}

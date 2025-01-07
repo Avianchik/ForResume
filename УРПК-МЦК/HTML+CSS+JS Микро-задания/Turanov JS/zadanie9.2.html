@@ -1,0 +1,27 @@
+<HTML>
+
+<HEAD>
+</HEAD>
+
+<BODY>
+    <P>Страница, содержащая сценарий.</P>
+    <div>
+        <input type="text" id="value1" size="5" value="0"></input>
+        <button id="btn1">Обновить</button>
+    </div>
+    <div>Перевернутое значение: <b id="value2"></b></div>
+    <script>
+        btn1.onfocus = function () {
+            var num = parseInt(document.getElementById('value1').value);
+            let reversed = 0;
+            while (num > 0) {
+                reversed = (reversed * 10) + (num % 10);
+                num = Math.floor(num / 10);
+            }
+            document.getElementById('value2').innerHTML = reversed;
+        }            
+    </script>
+    <P>Конец формирования страницы, содержащей сценарий</P>
+</BODY>
+
+</HTML>

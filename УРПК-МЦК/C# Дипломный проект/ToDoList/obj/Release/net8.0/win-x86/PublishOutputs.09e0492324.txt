@@ -1,0 +1,7 @@
+G:\!РАСПЕЧАТАТЬ\asd\appsettings.Development.json
+G:\!РАСПЕЧАТАТЬ\asd\appsettings.json
+G:\!РАСПЕЧАТАТЬ\asd\ToDoList.pdb
+G:\!РАСПЕЧАТАТЬ\asd\ToDoList.DAL.pdb
+G:\!РАСПЕЧАТАТЬ\asd\ToDoList.Service.pdb
+G:\!РАСПЕЧАТАТЬ\asd\ToDoList.Domain.pdb
+G:\!РАСПЕЧАТАТЬ\asd\ToDoList.exe
